@@ -31,7 +31,7 @@ class CalculatorContainer extends Component<IProps, IState> {
               <h1 className="card py-2 px-3 text-right mb-4 text-dark">{this.props.displayValue}</h1>
               <div className="d-flex flex-wrap">
 
-                <button className="btn w-25 btn-lg btn-primary" onClick={this.props.setDigit("9")}>9</button>
+                {/* <button className="btn w-25 btn-lg btn-primary" onClick={this.props.setDigit("9")}>9</button>
                 <button className="btn w-25 btn-lg btn-primary" onClick={this.props.setDigit("8")}>8</button>
                 <button className="btn w-25 btn-lg btn-primary" onClick={this.props.setDigit("7")}>7</button>
                 <button className="btn w-25 btn-lg btn-warning" onClick={this.props.setOperator("+")}>&plus;</button>
@@ -49,7 +49,7 @@ class CalculatorContainer extends Component<IProps, IState> {
                 <button className="btn w-25 btn-lg btn-primary" onClick={setDigit("0")}>0</button>
                 <button className="btn w-25 btn-lg btn-danger" onClick={this.props.clear}>C</button>
                 <button className="btn w-25 btn-lg btn-warning" onClick={setResult}>=</button>
-                <button className="btn w-25 btn-lg btn-warning" onClick={setOperator("/")}>&divide;</button>
+                <button className="btn w-25 btn-lg btn-warning" onClick={setOperator("/")}>&divide;</button> */}
 
               </div>
             </div>
@@ -69,10 +69,10 @@ const mapStateToProps = (state: IState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  clear: () => dispatch(clear()),
-  setDigit: (digit: number | null) => dispatch(setDigit(digit)),
-  setOperator: (operator: string) => dispatch(setOperator(operator)),
-  setResult,
+  // clear: () => dispatch(clear()),
+  // setDigit: (digit: number | null) => dispatch(setDigit(digit)),
+  // setOperator: (operator: string) => dispatch(setOperator(operator)),
+  // setResult,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CalculatorContainer);

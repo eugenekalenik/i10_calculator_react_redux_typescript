@@ -1,11 +1,9 @@
 import { initialState, IState } from "../reducers";
-import { Dispatch } from "redux";
-import { ANY_ACTION } from "../constants/action-types";
 
 export const clear = () => (initialState);
 
 export const setDigit = (value: string) => {
-  const { firstOperand, operator } = state;
+  const { firstOperand, operator } = initialState;
 
   if (firstOperand === null && value === "0") {
     return;
@@ -20,8 +18,8 @@ export const setDigit = (value: string) => {
 
   if (firstOperand !== null && operator === "") {
     return {
-      firstOperand: Number(state.firstOperand + value),
-      displayValue: String(state.firstOperand + value)
+      firstOperand: Number(firstOperand + value),
+      displayValue: String(firstOperand + value)
     };
   }
 
@@ -34,7 +32,7 @@ export const setDigit = (value: string) => {
 };
 
 export const setOperator = (operator: string) => {
-  const { firstOperand } = state;
+  const { firstOperand, displayValue } = initialState;
 
   if (firstOperand === 0) {
     return;
@@ -42,7 +40,7 @@ export const setOperator = (operator: string) => {
 
   return {
     operator: operator,
-    displayValue: state.displayValue + operator, firstOperand: Number(state.displayValue),
+    displayValue: displayValue + operator, firstOperand: Number(displayValue),
   };
 };
 
