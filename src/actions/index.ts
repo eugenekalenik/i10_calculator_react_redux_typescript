@@ -1,63 +1,29 @@
-import { initialState, IState } from "../reducers";
+import { CLEAR, SET_DIGIT, SET_OPERATOR, SET_RESULT } from "../constants/action-types";
+import { IPayload } from "../interfaces";
 
-export const clear = () => (initialState);
-
-export const setDigit = (value: string) => {
-  const { firstOperand, operator } = initialState;
-
-  if (firstOperand === null && value === "0") {
-    return;
-  }
-
-  if (firstOperand === null) {
-    return {
-      firstOperand: Number(value),
-      displayValue: String(value)
-    };
-  }
-
-  if (firstOperand !== null && operator === "") {
-    return {
-      firstOperand: Number(firstOperand + value),
-      displayValue: String(firstOperand + value)
-    };
-  }
-
-  if (firstOperand !== null && operator !== "") {
-    return {
-      secondOperand: Number(value),
-      displayValue: String(firstOperand + operator + value),
-    };
-  }
-};
-
-export const setOperator = (operator: string) => {
-  const { firstOperand, displayValue } = initialState;
-
-  if (firstOperand === 0) {
-    return;
-  }
-
+export const clear = () => {
   return {
-    operator: operator,
-    displayValue: displayValue + operator, firstOperand: Number(displayValue),
-  };
+    type: CLEAR,
+  }
 };
 
-export const setResult = (state: IState) => {
-  const { firstOperand, operator, secondOperand } = state;
+export const setDigit = (payload: IPayload) => {
+  return {
+    type: SET_DIGIT,
+    payload,
+  }
+};
 
-  if (firstOperand !== null && operator !== "" && secondOperand !== null && secondOperand !== 0) {
-    return {
-      firstOperand: null,
-      secondOperand: null,
-      displayValue: eval(firstOperand + operator + secondOperand),
-      operator: "",
-    };
-  } else {
-    clear();
-    return {
-      displayValue: "Error",
-    };
+export const setOperator = (payload: IPayload) => {
+  return {
+    type: SET_OPERATOR,
+    payload,
+  }
+};
+
+export const setResult = (payload: IPayload) => {
+  return {
+    type: SET_RESULT,
+    payload,
   }
 };

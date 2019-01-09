@@ -1,15 +1,5 @@
-import { combineReducers } from "redux";
-
-export interface IState {
-  firstOperand: number | null;
-  secondOperand: number | null;
-  displayValue: string;
-  operator: string;
-  clear?: () => void;
-  setDigit?: () => void;
-  setOperator?: () => void;
-  setResult?: () => void;
-}
+import { CLEAR, SET_DIGIT, SET_OPERATOR, SET_RESULT } from "../constants/action-types";
+import { IState, IAction } from "../interfaces";
 
 export const initialState = {
   firstOperand: null,
@@ -18,21 +8,16 @@ export const initialState = {
   operator: "",
 }
 
-export interface IAction {
-  type: string;
-  [key: string]: any;
-}
+const rootReducer = (state: IState = initialState, action: IAction) => {
+  if (action.type === CLEAR) {
+    return initialState;
+  }
 
-const firstOperand = (state: number | null = null, action: IAction) => null;
-const secondOperand = (state: number | null = null, action: IAction) => null;
-const displayValue = (state: string = "0", action: IAction) => "0";
-const operator = (state: string = "", action: IAction) => "";
+  if (action.type === SET_DIGIT || action.type === SET_OPERATOR || action.type === SET_RESULT) {
+    return { ...state, ...action.payload };
+  }
 
-const rootReducer = combineReducers({
-  firstOperand,
-  secondOperand,
-  displayValue,
-  operator,
-})
+  return state;
+};
 
 export default rootReducer;
